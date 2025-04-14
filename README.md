@@ -1,66 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel12_Vue3_Inertia_Tailwind
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a complete Single Page Application (SPA) from the ground up using the modern VILT stack — Laravel 12, Vue 3, Inertia.js, and Tailwind CSS. This full-stack project covers everything from authentication and routing to database management and responsive frontend design.
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Prerequisites](#prerequisites)
+- [Setup Instructions](#setup-instructions)
+- [Running the Application](#running-the-application)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Before you start, ensure you have the following installed:
 
-## Learning Laravel
+- Docker: [Install Docker](https://docs.docker.com/get-docker/)
+- Docker Compose: [Install Docker Compose](https://docs.docker.com/compose/install/)
+- Composer: [Install Composer](https://getcomposer.org/download/)
+- PHP (Optional, if you want to run it outside Docker)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Setup Instructions
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Clone the Repository**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Clone the project to your local machine:
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+```
 
-## Laravel Sponsors
+2. **Set Up Environment Variables**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Copy the .env.example to a new .env file:
+```bash
+cp .env.example .env
+```
 
-### Premium Partners
+Edit the .env file and configure your database credentials:
+```bash
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_user
+DB_PASSWORD=your_password
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+3. **Build and Start Docker Containers**
 
-## Contributing
+Use Docker Compose to build and start the containers:
+```bash
+docker-compose up -d --build
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This will build the containers defined in docker-compose.yml, including PHP, Nginx, PostgreSQL, and Redis.
 
-## Code of Conduct
+4. **Install Dependencies with Composer**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Install PHP dependencies inside the app container:
+```bash
+docker exec -it Laravel12_Vue3_Inertia_Tailwind_php composer install
+```
 
-## Security Vulnerabilities
+If you need to install a specific package, you can run:
+```bash
+docker exec -it Laravel12_Vue3_Inertia_Tailwind_php composer require <package-name>
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Install front-end dependencies using npm**
 
-## License
+Install Frontend Dependencies inside the app container:
+```bash
+docker exec -it Laravel12_Vue3_Inertia_Tailwind_php npm install
+````
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. **Generate Application Key**
+
+Run the following command to generate a new Laravel application key:
+```bash
+docker exec -it Laravel12_Vue3_Inertia_Tailwind_php php artisan key:generate
+```
+
+7. **Migrate the Database**
+
+Run the database migrations to set up the required tables:
+```bash
+docker exec -it Laravel12_Vue3_Inertia_Tailwind_php php artisan migrate --seed
+```
+
+## Running the Application
+
+1. **Start Vite Dev Server**
+```bash
+1. docker exec -it Laravel12_Vue3_Inertia_Tailwind_php npm run dev
+```
+
+2. **Access the Application in Your Browser**
+
+After the containers are up, visit **http://localhost** in your browser. You should see your Laravel app running.
