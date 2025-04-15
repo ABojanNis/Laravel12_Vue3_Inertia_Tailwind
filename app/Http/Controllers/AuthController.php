@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/listing');
+        return redirect()->route('home');
     }
 
     public function destroy(Request $request): RedirectResponse
