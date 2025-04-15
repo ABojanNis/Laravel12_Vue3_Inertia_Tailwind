@@ -16,7 +16,7 @@ const filterForm = useForm({
 
 const filter = () => {
     filterForm.get(
-        route('listing.index'),
+        route('home'),
         {
             preserveState: true,
             preserveScroll: true,

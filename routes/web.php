@@ -26,11 +26,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', [IndexController::class, 'index']);
-Route::get('/hello', [IndexController::class, 'show']);
+Route::get('/', [ListingController::class, 'index'])
+    ->name('home');
 
 Route::resource('listing', ListingController::class)
-    ->only(['index', 'show']);
+    ->only(['show']);
 
 Route::resource('listing.offer', ListingOfferController::class)
     ->middleware('auth')
@@ -64,7 +64,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect()->route('listing.index')->with('success', 'Email was verified!');
+    return redirect()->route('home')->with('success', 'Email was verified!');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::resource('user-account', UserAccountController::class)

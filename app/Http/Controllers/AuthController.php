@@ -39,6 +39,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('listing.index');
+        return redirect()->route('home');
     }
 }

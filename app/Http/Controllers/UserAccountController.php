@@ -28,7 +28,7 @@ class UserAccountController extends Controller
 
         event(new Registered($user));
 
-        return redirect()->route('listing.index')
+        return redirect()->route('home')
             ->with('success', 'Account created!');
     }
 }
